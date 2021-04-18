@@ -2,7 +2,7 @@
     <h3 class="modal-title" id="modal-title">Add client</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    <form name="clientsForm" ng-controller="ClientsController as $controller">
+    <form name="clientsForm" ng-controller="ClientsController">
         <div class="form-group">
             <label for="clientFirstName">First name</label>
             <input type="text" class="form-control" id="clientFirstName" ng-model="clientFirstName" ng-pattern="namePattern" aria-describedby="emailHelp" placeholder="Client first name">
@@ -21,10 +21,10 @@
             <span ng-show="clientsForm.clientEmail.$invalid">invalid.</span>
         </div>
         
-        <div class="form-check">
+        <!--<div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+        </div>-->
         <button type="button" class="btn btn-primary" ng-click="submit()" ng-disabled="clientsForm.$invalid">Submit</button>
     </form>
 </div>

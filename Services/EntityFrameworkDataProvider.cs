@@ -19,9 +19,6 @@ namespace ClientsExercise.Services
         {
             using (_context)
             {
-                var phoneTypes = _context.PhoneTypes.ToList();
-
-                using var transaction = _context.Database.BeginTransaction();
                 try
                 {
                     var client = new Data.Entities.Client
@@ -32,15 +29,29 @@ namespace ClientsExercise.Services
                         Email = model.Email
                     };
                     _context.Clients.Add(client);
-                    _context.SaveChangesAsync();
-                    transaction.Commit();
-                    return model;
+                    _context.SaveChanges();
+
+                    return _context.Clients
+                                .Where(x => x.Id == client.Id)
+                                .Select(x => new Client
+                                {
+                                    Id = x.Id,
+                                    LastName = x.LastName,
+                                    FirstName = x.FirstName,
+                                    Address = x.Address,
+                                    Email = x.Email,
+                                    PhoneNumbers = x.ClientPhones.Select(p => new PhoneNumber
+                                    {
+                                        Type = p.PhoneType.Name,
+                                        Number = p.PhoneNumber
+                                    }).ToList()
+                                }).FirstOrDefault();
+
                 }
                 catch (Exception e)
                 {
                     e.ToString();
-                    transaction.Rollback();
-                    return new Client();
+                    throw new Exception(e.Message);
                 }
             }
         }
@@ -56,7 +67,7 @@ namespace ClientsExercise.Services
                     if (toDelete != null)
                     {
                         _context.Clients.Remove(toDelete);
-                        _context.SaveChangesAsync();
+                        _context.SaveChanges();
                     }
                     _ctxTransaction.Commit();
                     return true;
@@ -102,5 +113,6 @@ namespace ClientsExercise.Services
         {
             return new Client();
         }
+
     }
 }

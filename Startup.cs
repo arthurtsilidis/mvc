@@ -35,7 +35,7 @@ namespace ClientsExercise
                        .AllowAnyHeader();
             }));
 
-            services.AddTransient<IDataProvider, AdoDataProvider>();
+            services.AddTransient<IDataProvider, EntityFrameworkDataProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

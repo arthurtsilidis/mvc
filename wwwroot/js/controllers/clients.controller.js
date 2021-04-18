@@ -59,11 +59,10 @@ angular.module("clientsApp", ["ui.bootstrap"])
                 lastName: $scope.clientLastName,
                 address: $scope.clientAddress,
                 email: $scope.clientEmail
-            }
+            } 
             console.log(client);
             insertClientApi(client);
             getAllClients();
-            closeDialog();
             console.log($scope.ClientModel);
         }
 
@@ -83,22 +82,15 @@ angular.module("clientsApp", ["ui.bootstrap"])
         //    $rootScope.$emit("closeParentDialog", {});
         //}
 
-        $scope.open = function () {
+        $scope.addNewClient = function () {
             console.log('modal');
             $uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'modal.template.html',
-                controller: 'ModalController',
-                resolve: {
-                    users: function () {
-                        return [
-                            { id: 1, name: "aaa" },
-                            { id: 2, name: "bbb" },
-                            { id: 3, name: "ccc" }
-                        ];
-                    }
-                }
+                controller: 'ClientsController',
+                resolve: {}
+            
             }).result.then(
                 function (result) {
                     console.log(result);
@@ -114,7 +106,7 @@ angular.module("clientsApp", ["ui.bootstrap"])
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'modal.confirmDelete.html',
-                controller: 'ModalController',
+                controller: 'ClientsController',
                 resolve: {
                     message: function () {
                         return `Are you sure you want to delete the item with id ${id}`;
@@ -129,19 +121,28 @@ angular.module("clientsApp", ["ui.bootstrap"])
                 }
             );
         }
+
+        //$scope.ok = function () {
+        //    $uibModalInstance.close("Modal dialog successfully closed!");
+        //}
+
+        //$scope.cancel = function () {
+        //    $uibModalInstance.dismiss("cancel");
+        //}
+
     })
     .controller("ModalController", function ($scope, $rootScope, $uibModalInstance, message) {
 
-        $scope.ok = function () {
-            $uibModalInstance.close("Modal dialog successfully closed!");
-        }
+    $scope.ok = function () {
+        $uibModalInstance.close("Modal dialog successfully closed!");
+    }
 
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss("cancel");
-        }
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss("cancel");
+    }
 
-        //$rootScope.$on("closeParentDialog", function () {
-        //    $scope.cancel();
-        //}
-    });
+    //$rootScope.$on("closeParentDialog", function () {
+    //    $scope.cancel();
+    //}
+});
 

@@ -38,8 +38,14 @@ namespace ClientsExercise.Controllers
             {
                 return BadRequest();
             }
-
-            return await Task.Run(() => _dataProvider.UpdateClient(model));
+            try
+            {
+                return await Task.Run(() => _dataProvider.CreateClient(model));
+            }
+            catch 
+            {
+                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         [HttpPut]
