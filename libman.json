@@ -16,6 +16,14 @@
     {
       "library": "gulp@3.8.5",
       "destination": "wwwroot/lib/gulp/"
+    },
+    {
+      "library": "angular-animate@1.8.2",
+      "destination": "wwwroot/lib/angular/"
+    },
+    {
+      "library": "angular-sanitize@1.8.2",
+      "destination": "wwwroot/lib/angular/"
     }
   ]
 }
