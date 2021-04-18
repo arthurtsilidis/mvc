@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hello world</title>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="js/lib/angular/angular-ui-router.min.js"></script>
+    <!--<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>-->
+    <script src="js/controllers/clients.controller.js"></script>
+    <script src="js/app.js"></script>
+    <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script data-require="bootstrap@3.3.7" data-semver="3.3.7" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script data-require="ui-bootstrap-tpls@1.2.5" data-semver="1.2.5" src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-1.2.5.js"></script>
+    <!--<script src="js/controllers/script.js"></script>-->
+    <!--<script src="../lib/angular/angular.min.js"></script>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/angular/angular-ui-router.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../controllers/clients.controller.js"></script>
+    <script src="../app.js"></script>
+    <script src="../controllers/script.js"></script>-->
+    <!--<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css">-->
+</head>
+<body ng-app="clientsApp"  ng-controller="ClientsController" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Clients</h3>
+                <div class="row" >
+                    <a href="#" ng-click="open()" title="Add Record" class="btn btn-success pull-right">
+                        Add new
+                    </a>
+                </div>
+                <table style="width:100%" class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>LastName</th>
+                        <th>FirstName</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone numbers</th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="item in ClientsList">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.lastName }}</td>
+                        <td>{{ item.firstName }}</td>
+                        <td>{{ item.address }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.phoneNumbers[0].type}}: {{item.phoneNumbers[0].number}}</td>
+                        <td>
+                            <a href="#" ng-click="getUser(item)" title="Edit Record" class="btn btn-primary btn-xs pull-right">
+                                Edit
+                            </a>
+                            <a href="#" ng-click="deleteClient(item)" title="Delete Record" class="btn btn-danger btn-xs pull-right">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

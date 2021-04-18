@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "angular-ui-router@1.0.29",
+      "destination": "wwwroot/lib/angular/",
+      "files": [
+        "angular-ui-router.min.js"
+      ]
+    },
+    {
+      "library": "twitter-bootstrap@4.6.0",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "gulp@3.8.5",
+      "destination": "wwwroot/lib/gulp/"
+    }
+  ]
+}

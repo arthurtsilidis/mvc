@@ -1,0 +1,290 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\index.html" />
+    <Content Remove="wwwroot\js\controllers\clients.controller.js" />
+    <Content Remove="wwwroot\js\lib\angular\angular-ui-router.min.js" />
+    <Content Remove="wwwroot\js\lib\angular\angular.min.js" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\js\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.js" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\js\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\bootstrap.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_alert.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_badge.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_caret.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_float.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_forms.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_grid.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_hover.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_image.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_lists.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_resize.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_size.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_transition.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\mixins\_visibility.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_align.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_background.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_borders.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_display.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_embed.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_flex.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_float.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_interactions.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_overflow.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_position.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_shadows.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_sizing.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_stretched-link.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_text.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_alert.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_badge.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_breadcrumb.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_button-group.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_buttons.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_card.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_carousel.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_close.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_code.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_custom-forms.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_dropdown.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_forms.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_functions.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_grid.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_images.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_input-group.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_jumbotron.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_list-group.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_media.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_mixins.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_modal.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_nav.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_navbar.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_pagination.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_popover.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_print.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_progress.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_reboot.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_root.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_spinners.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_tables.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_toasts.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_tooltip.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_transitions.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_type.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_utilities.scss" />
+    <Content Remove="wwwroot\js\lib\bootstrap\scss\_variables.scss" />
+    <Content Remove="wwwroot\js\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Remove="wwwroot\js\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Remove="wwwroot\js\lib\jquery-validation\LICENSE.md" />
+    <Content Remove="wwwroot\js\lib\jquery\dist\jquery.js" />
+    <Content Remove="wwwroot\js\lib\jquery\dist\jquery.min.js" />
+    <Content Remove="wwwroot\js\lib\jquery\dist\jquery.min.map" />
+    <Content Remove="wwwroot\js\lib\jquery\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngularJS.Core" Version="1.8.2" />
+    <PackageReference Include="Gulp.js" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.14" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\js\controllers\clients.controller.js" />
+    <None Include="wwwroot\js\lib\angular\angular-ui-router.min.js" />
+    <None Include="wwwroot\js\lib\angular\angular.min.js" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-grid.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\js\lib\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\lib\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\bootstrap-grid.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\bootstrap-reboot.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\bootstrap.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_alert.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_background-variant.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_badge.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_border-radius.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_caret.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_clearfix.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_deprecate.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_float.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_forms.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_gradients.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_grid-framework.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_grid.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_hover.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_image.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_list-group.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_lists.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_nav-divider.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_pagination.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_reset-text.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_resize.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_screen-reader.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_size.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_table-row.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_text-hide.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_transition.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\mixins\_visibility.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_align.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_background.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_borders.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_clearfix.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_display.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_embed.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_flex.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_float.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_interactions.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_overflow.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_position.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_screenreaders.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_shadows.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_sizing.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_spacing.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_stretched-link.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_text.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\utilities\_visibility.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\vendor\_rfs.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_alert.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_badge.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_button-group.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_buttons.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_card.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_carousel.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_close.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_code.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_custom-forms.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_dropdown.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_forms.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_functions.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_grid.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_images.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_input-group.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_jumbotron.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_list-group.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_media.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_mixins.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_modal.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_nav.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_navbar.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_pagination.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_popover.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_print.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_progress.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_reboot.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_root.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_spinners.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_tables.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_toasts.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_tooltip.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_transitions.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_type.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_utilities.scss" />
+    <None Include="wwwroot\js\lib\bootstrap\scss\_variables.scss" />
+    <None Include="wwwroot\js\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\js\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\js\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <None Include="wwwroot\js\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\js\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\js\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\js\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\js\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\js\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\js\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\js\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\js\lib\jquery\LICENSE.txt" />
+  </ItemGroup>
+
+</Project>
