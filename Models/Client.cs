@@ -27,7 +27,7 @@ public int Id { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Address should be minimum 5 characters and a maximum of 100 characters")]
-        [RegularExpression("^((?!^Address$)[0-9A-Za-z #.,])+$", ErrorMessage = "Address is required and must be properly formatted.")]
+        //[RegularExpression("^((?!^Address$)[0-9A-Za-z #.,])+$", ErrorMessage = "Address is required and must be properly formatted.")]
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
@@ -36,6 +36,7 @@ public int Id { get; set; }
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
+
         public IList<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

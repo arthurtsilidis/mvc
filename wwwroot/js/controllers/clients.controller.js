@@ -1,139 +1,283 @@
 ﻿
 angular.module("clientsApp", ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-angular.module('clientsApp').controller("ClientsController", function ($scope, $http, $uibModal) {
-    $scope.ClientsList = null;
-    $scope.ClientModel = null;
-    $scope.apiCallResult = null;
-    $scope.apiSuccess = false;
-    $scope.itemToDelete = false;
-    getAllClients();
-
+angular.module('clientsApp').controller("ClientsController", function ($http, $uibModal) {
+    
+    //getClients();
     var $ctrl = this;
-   
+    $ctrl.ClientsList = null;
 
-    $scope.emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    $scope.namePattern = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
-    $scope.phoneNumberPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    
 
-    function getAllClients() {
+    // regex patterns
+    //$ctrl.emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    $ctrl.emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    $ctrl.namePattern = /^(?=.{2,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
+    $ctrl.phoneNumberPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    $ctrl.getClients = function () {
+        getClients();
+    }
+
+    $ctrl.addClient = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'clientModal.html',
+            controller: 'CreateClientController',
+            controllerAs: '$ctrl'
+        });
+
+        modalInstance.result.then(function (item) {
+            addClientApi(item);
+        });
+    };
+
+    $ctrl.editClient = function (item) {
+        $ctrl.client = item;
+        console.log(item);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'clientModal.html',
+            controller: 'EditClientController',
+            controllerAs: '$ctrl',
+            resolve: {
+                client: function () {
+                    return $ctrl.client;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (model) {
+            console.log(model);
+            $ctrl.client = model;
+            editClientApi(model);
+        }, function () {
+
+        });
+    };
+
+    $ctrl.deleteClient = function (item) {
+        $ctrl.client = item;
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'deleteClientModal.html',
+            controller: 'DeleteConfirmController',
+            controllerAs: '$ctrl',
+            resolve: {
+                client: function () {
+                    return $ctrl.client;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (model) {
+            deleteClientApi(model.id);
+            $ctrl.ClientsList.splice($ctrl.ClientsList.findIndex(item => item.id === model.id), 1);
+        });
+    };
+
+
+    function showDialog(result) {
+        console.log('show dialog called');
+        console.log(result);
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'dialogModal.html',
+            controller: 'DialogController',
+            controllerAs: '$ctrl',
+            resolve: {
+                client: function () {
+                    return result;
+                }
+            }
+        });
+
+        //modalInstance.result.then(function (model) {
+        //});
+    }
+
+    function getClients() {
         console.log('dd');
         $http({
             method: 'GET',
             url: '/api/clients/'
         }).then(function (response) {
-            $scope.ClientsList = response.data;
-            console.log(response.data);
+            $ctrl.ClientsList = response.data.map(item => ({
+                id: item.id,
+                lastName: item.lastName,
+                firstName: item.firstName,
+                address: item.address,
+                email: item.email,
+                homePhones: item.phoneNumbers.filter((item) => { return item.type === 'Home' }).map((item) => { return item.number }).join(", "),
+                mobilePhones: item.phoneNumbers.filter((item) => { return item.type === 'Mobile' }).map((item) => { return item.number }).join(", "),
+                workPhones: item.phoneNumbers.filter((item) => { return item.type === 'Work' }).map((item) => { return item.number }).join(", "),
+            }));
+            console.log($ctrl.ClientsList);
         }, function (error) {
             console.log(error);
         });
     };
 
-    function insertClientApi(data) {
-        $http.post('/api/clients', JSON.stringify(data))
+    function addClientApi(item) {
+        var homePhones = item.homePhones ? [{ type: "Home", number: item.homePhones }] : []
+        var mobilePhones = item.mobilePhones ? [{ type: "Mobile", number: item.mobilePhones }] : []
+        var workPhones = item.workPhones ? [{ type: "Work", number: item.workPhones }] : []
+        var client = {
+            firstName: item.firstName,
+            lastName: item.lastName,
+            address: item.address,
+            email: item.email,
+            phoneNumbers: [...homePhones, ...mobilePhones, ...workPhones
+            ]
+        };
+
+        $http.post('/api/clients', JSON.stringify(client))
             .then(function (response) {
                 if (response.data) {
-                    $scope.ClientModel = response.data;
+                    $ctrl.client = {
+                        id: response.data.id,
+                        lastName: response.data.lastName,
+                        firstName: response.data.firstName,
+                        address: response.data.address,
+                        email: response.data.email,
+                        homePhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Home' }).map((item) => { return item.number }).join(", "),
+                        mobilePhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Mobile' }).map((item) => { return item.number }).join(", "),
+                        workPhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Work' }).map((item) => { return item.number }).join(", "),
+                    }
+                    $ctrl.ClientsList.push($ctrl.client);
                 }
             }, function (response) {
-                $scope.apiSuccess = false;
-                $scope.apiMessage = response
+
+            });
+    }
+
+    function editClientApi(item) {
+        var homePhones = item.homePhones ? [{ type: "Home", number: item.homePhones }] : []
+        var mobilePhones = item.mobilePhones ? [{ type: "Mobile", number: item.mobilePhones }] : []
+        var workPhones = item.workPhones ? [{ type: "Work", number: item.workPhones }] : []
+        var client = {
+            id: item.id,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            address: item.address,
+            email: item.email,
+            phoneNumbers: [...homePhones, ...mobilePhones, ...workPhones
+            ]
+        };
+
+        $http.put('/api/clients', JSON.stringify(client))
+            .then(function (response) {
+                if (response.data) {
+                    $ctrl.client = {
+                        id: response.data.id,
+                        lastName: response.data.lastName,
+                        firstName: response.data.firstName,
+                        address: response.data.address,
+                        email: response.data.email,
+                        homePhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Home' }).map((item) => { return item.number }).join(", "),
+                        mobilePhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Mobile' }).map((item) => { return item.number }).join(", "),
+                        workPhones: response.data.phoneNumbers.filter((item) => { return item.type === 'Work' }).map((item) => { return item.number }).join(", "),
+                    }
+                    $ctrl.ClientsList[$ctrl.ClientsList.findIndex(item => item.id === $ctrl.client.id)] = $ctrl.client;
+                }
+            }, function (response) {
+
             });
     }
 
     function deleteClientApi(id) {
         $http.delete(`/api/clients/${id}`, id).then(function (response) {
 
+            //showDialog({ state: 'success', message: 'success message' });
+
         }, function (response) {
-
+                //showDialog({ state: 'failure', message: 'failure message' });
         });
     };
+});
 
-    $scope.submit = function () {
-        let client = {
-            firstName: $scope.clientFirstName,
-            lastName: $scope.clientLastName,
-            address: $scope.clientAddress,
-            email: $scope.clientEmail
-        }
-        console.log(client);
-        insertClientApi(client);
-        getAllClients();
-        console.log($scope.ClientModel);
-    };
+angular.module('clientsApp').controller("CreateClientController",
+    function ($uibModalInstance) {
+        var $ctrl = this;
+        $ctrl.clientModel = null;
+        
+        $ctrl.ok = function () {
+            $uibModalInstance.close($ctrl.clientModel);
+        };
 
-    deleteConfirm = function (id) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'modal.confirmDelete.html',
-            controller: 'ModalController',
-            controllerAs: '$ctrl',
-            resolve: {
-                itemToDelete: function () {
-                    return $scope.itemToDelete;
-                }
-            }
-        });
+        $ctrl.cancel = function () {
+            $uibModalInstance.dismiss("cancel");
+        };
+    });
 
-        modalInstance.result.then(function () {
-            deleteClientApi($scope.itemToDelete.id);
-            var deleted = $scope.ClientsList.indexOf($scope.itemToDelete);
-            $scope.ClientsList.splice(deleted, 1);
-            console.log($scope.ClientsList);
-        });
-    };
+angular.module('clientsApp').controller("DeleteConfirmController",
+    function ($uibModalInstance, client) {
+        var $ctrl = this;
+        $ctrl.clientModel = {
+            firstName: "",
+            lastName: "",
+            address: "",
+            email: "",
+            homePhones: "",
+            mobilePhones: "",
+            workPhones: ""
+        };
 
-    $scope.deleteClient = function (item) {
-        $scope.itemToDelete = item;
-        deleteConfirm(item.id);
-
-        //deleteClientApi(item.id);
-        //if ($scope.apiCallResult.success) {
-        //    alert("ok");
-        //    var deleted = $scope.ClientsList.indexOf(item);
-        //    $scope.ClientsList.splice(index, 1);
-        //}
-        //else {
-        //    alert(`An error has occured while deleting item. ${$scope.apiCallResult.message}`);
-        //}
-    }
-
-    $scope.addNewClient = function () {
-        let client = {
-            firstName: $scope.clientFirstName,
-            lastName: $scope.clientLastName,
-            address: $scope.clientAddress,
-            email: $scope.clientEmail
-        }
-        insertClientApi(client);
-        getAllClients();
-        console.log($scope.ClientModel);
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'modal.template.html',
-            controller: 'ModalController',
-            controllerAs: '$ctrl',
-            resolve: {}
-        });
-
-        modalInstance.result.then(function () {
-
-            //deleteClientApi(item.id);
-            //getAllClients();
-        });
-    };
-})
-    .controller("ModalController", function ($scope, $uibModalInstance) {
-
-        $scope.ok = function () {
-            $uibModalInstance.close("Modal dialog successfully closed!");
+        $ctrl.ok = function () {
+            $uibModalInstance.close($ctrl.clientModel);
         }
 
-        $scope.cancel = function () {
+        $ctrl.cancel = function () {
+            $uibModalInstance.dismiss("cancel");
+        }
+    });
+
+angular.module('clientsApp').controller("EditClientController",
+    function ($uibModalInstance, client) {
+
+        var $ctrl = this;
+        $ctrl.clientModel = {
+            id: client.id,
+            firstName: client.firstName,
+            lastName: client.lastName,
+            address: client.address,
+            email: client.email,
+            homePhones: client.homePhones,
+            mobilePhones: client.mobilePhones,
+            workPhones: client.workPhones
+        };
+        
+
+        $ctrl.ok = function () {
+            $uibModalInstance.close($ctrl.clientModel);
+        }
+
+        $ctrl.cancel = function () {
+            $uibModalInstance.dismiss("cancel");
+        }
+    });
+
+angular.module('clientsApp').controller("DialogController",
+    function ($uibModalInstance, result) {
+        console.log('dialog');
+        console.log(result);
+        var $ctrl = this;
+        $ctrl.result = result;
+
+        $ctrl.ok = function () {
+            $uibModalInstance.close($ctrl.result);
+        }
+
+        $ctrl.cancel = function () {
             $uibModalInstance.dismiss("cancel");
         }
     });

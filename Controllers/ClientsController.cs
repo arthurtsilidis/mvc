@@ -5,6 +5,7 @@ using ClientsExercise.Models;
 using ClientsExercise.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace ClientsExercise.Controllers
     {
         private readonly PhonesCatalogueContext _context = null;
         IDataProvider _dataProvider;
-        public ClientsController(IDataProvider sender)
+        public ClientsController(IDataProvider sender, PhonesCatalogueContext dbContext)
         {
-            _context = new PhonesCatalogueContext();
+            _context = dbContext;
             _dataProvider = sender;
         }
 
@@ -49,43 +50,21 @@ namespace ClientsExercise.Controllers
         }
 
         [HttpPut]
-        [Route("api/clients/{id}")]
-        public async Task<object> UpdateClient(int id, [FromBody] Models.Client model)
+        [Route("api/clients")]
+        public async Task<object> UpdateClient([FromBody] Models.Client model)
         {
-            object result = null; string message = "";
-            if (model == null)
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest();
             }
-            using (_context)
+            try
             {
-                using var _ctxTransaction = _context.Database.BeginTransaction();
-                try
-                {
-                    var entityUpdate = _context.Clients.FirstOrDefault(x => x.Id == id);
-                    if (entityUpdate != null)
-                    {
-                        //entityUpdate.Name = model.Name;
-                        //entityUpdate.Phone = model.Phone;
-                        //entityUpdate.Email = model.Email;
-
-                        await _context.SaveChangesAsync();
-                    }
-                    _ctxTransaction.Commit();
-                    message = "Entry Updated";
-                }
-                catch (Exception e)
-                {
-                    _ctxTransaction.Rollback(); e.ToString();
-                    message = "Entry Update Failed!!";
-                }
-
-                result = new
-                {
-                    message
-                };
+                return await Task.Run(() => _dataProvider.UpdateClient(model));
             }
-            return result;
+            catch
+            {
+                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         [HttpDelete]

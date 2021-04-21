@@ -12,12 +12,8 @@ namespace ClientsExercise.Data
 {
     public partial class PhonesCatalogueContext : DbContext
     {
-        public PhonesCatalogueContext()
-        {
-        }
 
-        public PhonesCatalogueContext(DbContextOptions<PhonesCatalogueContext> options)
-            : base(options)
+        public PhonesCatalogueContext(DbContextOptions<PhonesCatalogueContext> options) : base(options)
         {
         }
 
@@ -27,10 +23,10 @@ namespace ClientsExercise.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=.\\;Database=PhonesCatalogue;Trusted_Connection=True;");
-            }
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    optionsBuilder.UseSqlServer("Server=.\\;Database=PhonesCatalogue;Trusted_Connection=True;");
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
